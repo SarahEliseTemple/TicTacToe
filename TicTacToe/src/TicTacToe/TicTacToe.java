@@ -10,7 +10,7 @@ public class TicTacToe {
 	final int X_MOVE = 1;
 	final int O_MOVE =2;
 	
-	
+	 
 	public TicTacToe() {
 		printBoard();
 		
