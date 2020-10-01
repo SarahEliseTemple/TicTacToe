@@ -17,7 +17,7 @@ public class TicTacToe {
 	String input = "";
 	
 	public TicTacToe() {
-		
+		 
 		while (true) {
 			printBoard();
 			scanner = new Scanner(System.in);
