@@ -1,7 +1,7 @@
 package TicTacToe;
 /* Name:Sarah Temple
  * Date: October 2
- * This should be a tictactoe game for the user to play with themselves
+ * This should be a tic-tac-toe game for the user to play with themselves
  */ 
 import java.util.Scanner;
 public class TicTacToe {
@@ -15,11 +15,16 @@ public class TicTacToe {
 	int turn = X_TURN;
 	Scanner scanner;
 	String input = "";
+	String yesno = "";
 	boolean stillPlaying = true;
 	boolean askToPlayAgain = false;
+	int xWins = 0;
+	int oWins = 0;
 	
 	public TicTacToe() {
+		
 		while (stillPlaying == true) {
+			
 			while (checkWin(X_MOVE) == false && checkWin(O_MOVE)==false && checkTie() == false) {
 				printBoard();
 				scanner = new Scanner(System.in);
@@ -41,13 +46,18 @@ public class TicTacToe {
 					int row = input.charAt(0) - 'a';
 					int column = input.charAt(1) - '1'; 
 					System.out.println(row+", "+ column);
-					if (turn == X_TURN) {
-						board[row][column] = X_MOVE;
-						turn = O_TURN;
+					if (board[row][column] == BLANK) {
+						if (turn == X_TURN) {
+							board[row][column] = X_MOVE;
+							turn = O_TURN;
+						}
+						else {
+							board[row][column] = O_MOVE;
+							turn =  X_TURN;
+						}
 					}
 					else {
-						board[row][column] = O_MOVE;
-						turn =  X_TURN;
+						System.out.println("That spot is already taken.");
 					}
 					
 				}
@@ -55,24 +65,28 @@ public class TicTacToe {
 			if (checkWin(X_MOVE) == true) {
 				System.out.println("X wins!!");
 				askToPlayAgain = true;
+				xWins++;
 			}
 			else if (checkWin(O_MOVE) == true) {
 				System.out.println("O wins!!");
 				askToPlayAgain = true;
+				oWins++;
 			}
 			else if (checkTie() == true) {
 				System.out.println("Its a tie!");
 				askToPlayAgain = true;
 			}
 			if (askToPlayAgain == true) {
+				System.out.println("X has won "+ xWins + " time(s) and O has won "+ oWins +" time(s).");
 				System.out.println("Do you want to play again? Type Y for yes and N for no.");
 				scanner = new Scanner(System.in);
-				String yesno = scanner.nextLine();
-				if (yesno == "Y") {
+				yesno = scanner.nextLine();
+				if (yesno.equals("Y")) {
+					printBoard();
 					askToPlayAgain = false;
 					stillPlaying = true;
 				}
-				else if (yesno =="N") {
+				else if (yesno.equals("N")) {
 					askToPlayAgain = false;
 					stillPlaying = false;
 				}
@@ -85,20 +99,33 @@ public class TicTacToe {
 		new TicTacToe();
 	}
 
-	public void printBoard() {// This is where we 
+	public void printBoard() {// This is where we print the board
 		System.out.println("\t1\t2\t3");
 		for (int row = 0; row < board.length; row++) {
 			String output = (char)('a'+row)+"\t";
-			for (int column = 0; column < board[0].length; column++) {
-				if (board[row][column]== BLANK) {
-					output += "\t";
+			if (checkWin(X_MOVE) == false && checkWin(O_MOVE)== false && checkTie() == false) {
+				for (int column = 0; column < board[0].length; column++) {
+					if (board[row][column]== BLANK) {
+						output += "\t";
+					}
+					else if (board[row][column] == X_MOVE) {
+						output += "X\t";
+					}
+					else if (board[row][column] == O_MOVE) {
+						output +="O\t";
+					}
 				}
-				else if (board[row][column] == X_MOVE) {
-					output += "X\t";
-				}
-				else if (board[row][column] == O_MOVE) {
-					output +="O\t";
-				}
+			}
+			else {
+				board[0][0] = BLANK;
+				board[0][1] = BLANK;
+				board[0][2] = BLANK;
+				board[1][0] = BLANK;
+				board[2][0] = BLANK;
+				board[1][1] = BLANK;
+				board[2][2] = BLANK;
+				board[1][2] = BLANK;
+				board[2][1] = BLANK;
 			}
 			System.out.println(output);
 			
