@@ -6,8 +6,8 @@ package TicTacToe;
 import java.util.Scanner;
 public class TicTacToe {
 
-	int[][] board = new int[3][3];
-	final int BLANK = 0;
+	int[][] board = new int[3][3]; // This creates the array. 
+	final int BLANK = 0; 
 	final int X_MOVE = 1;
 	final int O_MOVE =2;
 	final int X_TURN = 0;
