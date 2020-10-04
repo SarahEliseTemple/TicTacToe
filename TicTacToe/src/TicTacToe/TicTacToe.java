@@ -116,7 +116,7 @@ public class TicTacToe {
 					}
 				}
 			}
-			else {
+			else {//this is my messy code to reset the board.
 				board[0][0] = BLANK;
 				board[0][1] = BLANK;
 				board[0][2] = BLANK;
@@ -132,7 +132,7 @@ public class TicTacToe {
 			
 		}
 	}
-	public boolean checkWin(int player) {
+	public boolean checkWin(int player) {//this is to check if someone won.
 		if (board[0][0] == player && board[1][0] == player && board[2][0] == player) {
 			return true;
 		}
@@ -160,7 +160,7 @@ public class TicTacToe {
 		
 		return false;
 	}
-	public boolean checkTie() {
+	public boolean checkTie() {// This part is to check for a tie.
 		for(int row = 0; row < board.length; row++) {
 			for (int column = 0; column < board.length; column++) {
 				if (board[row][column] == BLANK) {
